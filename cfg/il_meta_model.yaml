@@ -1,0 +1,192 @@
+IL:
+  TARGET_COL: offtake_il
+
+  GRANULARITY_LEVEL: sku_wo_pkg
+  PREDICTION_HORIZON: 20
+
+  TS_FORECASTER: Prophet
+  TS_FORECASTER_PARAMS:
+    yearly_seasonality: True
+    weekly_seasonality: False
+    daily_seasonality: False
+    seasonality_mode: multiplicative
+    growth: linear
+    seasonality_prior_scale: 0.1
+    changepoint_prior_scale: 0.05
+
+  TS_BOOSTER: ExtraTreesRegressor
+  TS_BOOSTER_PARAMS:
+    max_depth: 3
+    max_features: 0.7
+    random_state: 17
+    bootstrap: True
+    min_samples_split: 10
+    n_estimators: 200
+  BOOST_FROM_DATE: 2018-01-01
+  EXTRAPOLATE_BOOSTER: True
+  BOOST_HORIZONS:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+  BOOSTER_FEATURE_COLS:
+    - stage_code
+    - price_min_6M
+    - 0to6_month_population_min_9M
+    - price_max_12M
+    - price_max_6M
+    - price_rel_to_stage_average
+    - price_rel_to_country_average
+    - price_rel_to_brand_average
+    - total_vol_mean_6M
+    - if_vol_mean_6M
+    - fo_vol_mean_6M
+    - gum_vol_mean_6M
+    - cl_vol_mean_6M
+    - il_vol_mean_6M
+  IGNORE_INPUT_DATA_BEFORE: 2015-01-01
+  IGNORE_INPUT_DATA_FROM: 2019-04-01  # first month of forecast (cycle month - 1)
+
+  FIRST_FOLD_VALIDATION_START: 2017-04-01
+  LAST_FOLD_VALIDATION_START: 2019-04-01  # cycle month - 1
+
+EIB:
+  TARGET_COL: offtake_eib
+
+  GRANULARITY_LEVEL: sku_wo_pkg
+  PREDICTION_HORIZON: 20
+
+  TS_FORECASTER: Prophet
+  TS_FORECASTER_PARAMS:
+    yearly_seasonality: True
+    weekly_seasonality: False
+    daily_seasonality: False
+    seasonality_mode: multiplicative
+    growth: linear
+    seasonality_prior_scale: 0.1
+    changepoint_prior_scale: 0.05
+
+  TS_BOOSTER: ExtraTreesRegressor
+  TS_BOOSTER_PARAMS:
+    max_depth: 3
+    max_features: 0.7
+    random_state: 17
+    bootstrap: True
+    min_samples_split: 10
+    n_estimators: 200
+  BOOST_FROM_DATE: 2018-01-01
+  EXTRAPOLATE_BOOSTER: True
+  BOOST_HORIZONS:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+  BOOSTER_FEATURE_COLS:
+    - rel_diff1_sellout_max_3M
+    - stage_code
+    - if_vol_max_6M
+    - fo_vol_mean_12M
+    - 0to6_month_population_min_12M
+    - 12to36_month_population_max_6M
+    - 12to36_month_population_min_6M
+    - total_vol_mean_12M
+    - 12to36_month_population_mean_9M
+    - fo_vol_max_12M
+    - rel_diff1_offtake_eib_mean_9M
+    - rel_diff1_offtake_il_mean_9M
+    - 12to36_month_population_mean_6M
+    - il_vol_mean_12M
+    - 0to6_month_population_min_9M
+    - il_vol_max_12M
+    - price_lag0
+    - 12to36_month_population_min_9M
+    - rel_diff1_offtake_il_max_12M
+    - total_vol_mean_6M
+    - if_vol_mean_6M
+    - 12to36_month_population_min_3M
+    - 0to6_month_population_mean_3M
+    - cl_vol_max_12M
+    - 12to36_month_population_max_3M
+    - rel_diff1_offtake_il_max_9M
+    - rel_diff1_offtake_eib_max_9M
+
+  IGNORE_INPUT_DATA_BEFORE: 2015-01-01
+  IGNORE_INPUT_DATA_FROM: 2019-04-01  # first month of forecast (cycle month - 1)
+
+  FIRST_FOLD_VALIDATION_START: 2017-04-01
+  LAST_FOLD_VALIDATION_START: 2019-04-01  # cycle month - 1
+
+DI:
+  TARGET_COL: offtake_di
+
+  GRANULARITY_LEVEL: sku_wo_pkg
+  PREDICTION_HORIZON: 20
+
+  TS_FORECASTER: Prophet
+  TS_FORECASTER_PARAMS:
+    yearly_seasonality: True
+    weekly_seasonality: False
+    daily_seasonality: False
+    seasonality_mode: multiplicative
+    growth: linear
+    seasonality_prior_scale: 0.1
+    changepoint_prior_scale: 0.05
+
+  TS_BOOSTER: ExtraTreesRegressor
+  TS_BOOSTER_PARAMS:
+    max_depth: 3
+    max_features: 0.7
+    random_state: 17
+    bootstrap: True
+    min_samples_split: 10
+    n_estimators: 200
+  BOOST_FROM_DATE: 2018-01-01
+  EXTRAPOLATE_BOOSTER: True
+  BOOST_HORIZONS:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+  BOOSTER_FEATURE_COLS:
+    - rel_diff1_offtake_di_mean_6M
+    - rel_diff1_offtake_eib_mean_6M
+    - rel_diff1_sellout_mean_9M
+    - rel_diff1_offtake_di_mean_9M
+    - months_since_first_offtake_di_gt0
+    - cl_vol_min_6M
+    - total_vol_min_6M
+    - fo_vol_mean_12M
+    - stage_code
+    - share_of_stage_3f_offtake_di_max_12M
+    - sellout_mean_3M
+    - share_of_total_sellout_max_12M
+    - price_lag0
+    - 6to12_month_population_max_12M
+    - 0to6_month_population_max_3M
+    - 0to6_month_population_mean_6M
+    - il_vol_mean_12M
+
+  IGNORE_INPUT_DATA_BEFORE: 2015-01-01
+  IGNORE_INPUT_DATA_FROM: 2019-04-01  # first month of forecast (cycle month - 1)
+
+  FIRST_FOLD_VALIDATION_START: 2017-04-01
+  LAST_FOLD_VALIDATION_START: 2019-04-01  # cycle month - 1
+

@@ -1,0 +1,55 @@
+---
+TARGET_COL: offtake_dc
+
+GRANULARITY_LEVEL: sku
+PREDICTION_HORIZON: 19
+
+TS_FORECASTER: Prophet
+TS_FORECASTER_PARAMS:
+  yearly_seasonality: True
+  weekly_seasonality: False
+  daily_seasonality: False
+  seasonality_mode: multiplicative
+  growth: linear
+  seasonality_prior_scale: 0.1
+  changepoint_prior_scale: 0.05
+
+TS_BOOSTER: RandomForestRegressor
+TS_BOOSTER_PARAMS:
+  max_depth: 3
+  max_features: 0.7
+  random_state: 17
+  min_samples_split: 2
+  n_estimators: 1500
+BOOST_FROM_DATE: 2018-01-01
+EXTRAPOLATE_BOOSTER: True
+BOOST_HORIZONS:
+  - 6
+BOOSTER_FEATURE_COLS:
+  - prophet_pred
+  - anp
+  - anp_min_6M
+  - osa
+  - anp_max_3M
+  - store_distribution
+  - offtake_dc_max_3M
+  - sellout_revenue_mean_3M
+  - offtake_dc_mean_3M
+  - anp_mean_6M
+  - sellout_mean_3M
+  - sellin_dc_mean_6M
+  - anp_min_3M
+  - offtake_dc_max_6M
+  - sellout_max_3M
+  - sellout_revenue_max_3M
+  - offtake_dc_min_6M
+  - offtake_dc_min_3M
+  - offtake_dc_mean_6M
+  - offtake_dc_max_9M
+  - offtake_dc_min_9M
+
+IGNORE_INPUT_DATA_BEFORE: 2015-01-01
+IGNORE_INPUT_DATA_FROM: 2019-04-01  # first month of forecast (cycle month)
+
+FIRST_FOLD_VALIDATION_START: 2017-05-01
+LAST_FOLD_VALIDATION_START: 2019-04-01  # cycle month
