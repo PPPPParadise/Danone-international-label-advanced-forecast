@@ -1,0 +1,213 @@
+IL:
+  SUBDIR: il_may_cycle_interface_format_inputs
+
+  FILES:
+    MAPPING_SKU_STD_INFO:
+      FILEPATH: C:\Users\Eulenberg Philipp\Egnyte\Shared\Cases\141802-10\13 Automation\Mapping tables\SKU_std_info.csv
+      SCHEMA:
+        Country_acc: STR
+        Brand_acc: STR
+        Tier_acc: STR
+        Stage_acc: STR
+        Package_acc: STR
+        SKU_std: STR
+        SKU_wo_pkg: STR
+        Stage_3F: STR
+        SKU_No: STR
+        From_DI: STR
+        Frome_EIB: STR
+
+    MAPPING_OSA_EIB:
+      FILEPATH: C:\Users\Eulenberg Philipp\Egnyte\Shared\Cases\141802-10\13 Automation\Mapping tables\F_OSA_EIB.csv
+      SCHEMA:
+        Item: STR
+        Country: STR
+        Brand: STR
+        Tier: STR
+        Stage_3F: STR
+        OSA_ISA: STR
+
+    DI_TRADEFLOW:
+      FILEPATH: C:\Users\eulenberg philipp\Documents\cases\Danone\Data\il_may_cycle_interface_format_inputs\DI_TRADEFLOW-201905.csv
+      SCHEMA:
+        sku_code: STR
+        sku: STR
+        country: STR
+        brand: STR
+        tier: STR
+        stage: STR
+        package: STR
+        channel: STR
+        type: STR
+        scope: STR
+        status: STR
+        date: STR
+        produced_date: STR
+        quantity: FLOAT
+        unit: STR
+
+    IL_OFFTAKE:
+      FILEPATH: C:\Users\eulenberg philipp\Documents\cases\Danone\Data\il_may_cycle_interface_format_inputs\IL_OFFTAKE-201905.csv
+      SCHEMA:
+        sku_code: STR
+        scope: STR
+        type: STR
+        date: STR
+        produced_date: STR
+        status: STR
+        volume: FLOAT
+        unit: STR
+
+    IL_SELLIN:
+      FILEPATH: C:\Users\eulenberg philipp\Documents\cases\Danone\Data\il_may_cycle_interface_format_inputs\IL_SELLIN-201905.csv
+      SCHEMA:
+        sku_code: STR
+        scope: STR
+        type: STR
+        date: STR
+        produced_date: STR
+        status: STR
+        value: FLOAT
+        unit: STR
+        weight_per_tin: FLOAT
+
+    EIB_PRICE:
+      FILEPATH: C:\Users\eulenberg philipp\Documents\cases\Danone\Data\il_may_cycle_interface_format_inputs\EIB_PRICE-201905_201904_combined.csv
+      SCHEMA:
+        sku_code: STR
+        sku: STR
+        country: STR
+        brand: STR
+        sub-brand: STR
+        stage: STR
+        source: STR
+        scope: STR
+        date: STR
+        price: FLOAT
+
+    EIB_OSA:
+      FILEPATH: C:\Users\eulenberg philipp\Documents\cases\Danone\Data\il_may_cycle_interface_format_inputs\EIB_OSA-201905.csv
+      SCHEMA:
+        Item: STR
+        value: FLOAT
+        week: INT
+        month: STR
+
+    SMARTPATH:
+      FILEPATH: C:\Users\eulenberg philipp\Documents\cases\Danone\Data\il_may_cycle_interface_format_inputs\data_IL_Smartpath.csv
+      SCHEMA:
+        Brand: STR
+        Scope: STR
+        Country: STR
+        Geography: STR
+        Source: STR
+        Channel: STR
+        date: STR
+        volume_ton: FLOAT
+        value_kRMB: FLOAT
+        price_kRMB_per_ton: FLOAT
+
+    CATEGORY_FORECAST:
+      FILEPATH: C:\Users\eulenberg philipp\Documents\cases\Danone\Data\il_may_cycle_interface_format_inputs\input_ts.csv
+      SCHEMA:
+        Month: STR
+        Total vol: FLOAT
+        IF vol: FLOAT
+        FO vol: FLOAT
+        GUM vol: FLOAT
+        CL vol: FLOAT
+        IL vol: FLOAT
+        0-6 Month population: FLOAT
+        6-12 Month population: FLOAT
+        12-36 Month population: FLOAT
+
+DC:
+  FILES:
+    DC_PRODUCT_LIST:
+      FILEPATH: C:\Users\eulenberg philipp\Egnyte\Shared\Cases\141802-10\13 Automation\June go-live\June updated data\ProductList_post_prep_DELETED_DUPLICATES.csv
+      SCHEMA:
+        SKU_NO: STR
+        SKU_Type: STR
+        Name: STR
+        Brand: STR
+        Stage: STR
+        UnitPrice: STR
+        weight_per_tin: STR
+        Unit: STR
+        CaseUnit: STR
+
+    DC_POS:
+      FILEPATH: C:\Users\eulenberg philipp\Egnyte\Shared\Cases\141802-10\08 Module - Demand forecasting\May Cycle\DC Input_IC_format\DC_POS.csv
+      SCHEMA:
+        date: STR
+        store_code: STR
+        SKU_NO: STR
+        quantity: FLOAT
+        POS_value: STR
+        scope: STR
+        type: STR
+        unit: STR
+
+    DC_OSA:
+      FILEPATH: C:\Users\eulenberg philipp\Egnyte\Shared\Cases\141802-10\08 Module - Demand forecasting\May Cycle\DC Input_IC_format\DC_OSA.csv
+      SCHEMA:
+        SKU: STR
+        Year: INT
+        Month: INT
+        OSA: FLOAT
+        CSL: FLOAT
+        date: STR
+
+    DC_ANP:
+      FILEPATH: C:\Users\eulenberg philipp\Egnyte\Shared\Cases\141802-10\13 Automation\June go-live\Historical data\DC_AnP.csv
+      SCHEMA:
+        Date: STR
+        Brand: STR
+        Spending: FLOAT
+
+    DC_SELLIN:
+      FILEPATH: C:\Users\eulenberg philipp\Egnyte\Shared\Cases\141802-10\08 Module - Demand forecasting\May Cycle\DC Input_IC_format\DC_sellin.csv
+      SCHEMA:
+        date: STR
+        SP_code: STR
+        SKU_NO: STR
+        quantity: FLOAT
+        scope: STR
+        type: STR
+        unit: STR
+        order_type: STR
+
+    DC_SPINV:
+      FILEPATH: C:\Users\eulenberg philipp\Egnyte\Shared\Cases\141802-10\08 Module - Demand forecasting\May Cycle\DC Input_IC_format\DC_SPinv.csv
+      SCHEMA:
+        SP_code: STR
+        date: STR
+        SKU_NO: STR # not needed
+        SKU: STR
+        quantity: FLOAT
+        revenue: FLOAT
+        price: FLOAT
+        scope: STR
+        type: STR
+        unit: STR
+
+    DC_SELLOUT:
+      FILEPATH: C:\Users\eulenberg philipp\Egnyte\Shared\Cases\141802-10\08 Module - Demand forecasting\May Cycle\DC Input_IC_format\DC_sellout.csv
+      SCHEMA:
+        date: STR
+        SKU_NO: STR
+        quantity: FLOAT
+        SP_price: FLOAT
+        revenue: FLOAT
+        price: FLOAT
+        scope: STR
+        type: STR
+        unit: STR
+
+    DC_STORE_DISTRIB:
+      FILEPATH: C:\Users\eulenberg philipp\Egnyte\Shared\Cases\141802-10\13 Automation\June go-live\Historical data\DC_store_distribution.csv
+      SCHEMA:
+        Month: STR
+        AC: INT
+        NC: INT
+        AP: INT
