@@ -8,7 +8,9 @@ Start at Mar.11 2020
 # Project Information
 ## Introduction
 
-In the past, 
+For IL demand team,they need to do offtake(sales direct by customers) forecast manually every month, 
+which takes them lots of efforts. And the forecast accuracy will dramatically influence the Production Plan.
+Such being the case, they wants to have this project to help them forecast offtake using big data and AI.
 
 ## Scope
 <!-- TOC -->
