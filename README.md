@@ -19,7 +19,7 @@ Such being the case, they wants to have this project to help them forecast offta
   - [Scope](#jump2.2)
   - [Folders Description](#jump2.3)
 - [Environment Requirements and Setup](#jump3)
-- [User Guide](#4)
+- [User Guide](#jump4)
 <!-- /TOC -->
 
 ## <span id="jump2.3">Folders Description</span>
@@ -48,7 +48,6 @@ pip3 install requirements.txt
 
 ---
 
-# <span id="jump3">User Guide</span>
-
+# <span id="jump4">User Guide</span>
 
 
