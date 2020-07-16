@@ -13,7 +13,7 @@ Such being the case, they wants to have this project to help them forecast offta
 
 ## <span id="jump2.2">Scope</span>
 <!-- TOC -->
-- [Danone China Supply Chain Automation](#jump1)
+- [Danone China International Label Offtake Forecast](#jump1)
 - [Project Information](#jump2)
   - [Introduction](#jump2.1)
   - [Scope](#jump2.2)
@@ -50,4 +50,15 @@ pip3 install requirements.txt
 
 # <span id="jump4">User Guide</span>
 
+In order to generate IL totoal offtake forecast, we can do the following instructions in the terminal
+
+```
+cd main
+```
+
+```
+python3 ForecasterIL.py
+```
+
+And the forecast results will be put in the results folder.
 
