@@ -1,0 +1,37 @@
+---
+output:
+  il:
+    /projects/danone_af/danone/data/addl_gran/IL_fcst_split.csv
+  dc:
+    /projects/danone_af/danone/data/addl_gran/DC_fcst_split.csv
+
+di:
+  history:
+    /projects/danone_af/danone/data/addl_gran/DI_tradeflow.csv
+
+il:
+  history:
+    /projects/danone_af/danone/data/addl_gran/il_offtake_historical.csv
+  sellin_history:
+    /projects/danone_af/danone/data/addl_gran/IL_sellin.csv
+  eib_history:
+    /projects/danone_af/danone/data/addl_gran/IL_offtake_all_hist.csv
+  mapping:
+    /projects/danone_af/danone/data/addl_gran/M_IL_Sellin_EIB_DI.csv
+  forecast:
+    /projects/danone_af/danone/data/addl_gran/formatted_il_fcst.csv
+
+dc:
+  offtake_history:
+    /projects/danone_af/danone/data/addl_gran/DC_POS.csv
+  sellout_history:
+    /projects/danone_af/danone/data/addl_gran/DC_sellout.csv
+  sellin_history:
+    /projects/danone_af/danone/data/addl_gran/DC_sellin.csv
+  forecast:
+    /projects/danone_af/danone/data/addl_gran/formatted_dc_fcst.csv
+  productlist:
+    /projects/danone_af/danone/data/addl_gran/ProductList.csv
+  customerlist:
+    /projects/danone_af/danone/data/addl_gran/CustomerList.csv
+

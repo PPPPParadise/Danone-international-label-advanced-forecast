@@ -1,0 +1,24 @@
+
+
+Ridge:
+  pca: [0, 0.1, 0.3, 0.5, 0.8, 1]
+  standard_scaling: [True, False]
+  alpha: [0.001, 0.01, 0.1, 1, 10, 100]
+  fit_intercept: [True, False]
+  normalize: [True, False]
+
+Lasso:
+  standard_scaling: [True, False]
+  pca: [0, 0.1, 0.3, 0.5, 0.8, 1]
+  alpha: [0.001, 0.01, 0.1, 1, 10, 100]
+  fit_intercept: [True, False]
+  normalize: [True, False]
+
+ElasticNet:
+  standard_scaling: [True, False]
+  pca: [0, 0.1, 0.3, 0.5, 0.8, 1]
+  alpha: [0.001, 0.01, 0.1, 1, 10, 100]
+  l1_ratio: [0, 0.25, 0.5, 0.75, 1]
+
+
+

@@ -1,0 +1,37 @@
+from src.scenario import *
+
+INDEX_COLS_FORECASTS = [
+    F_DN_APO_FLG,
+    F_DN_CRY_COD,
+    F_DN_CYC_DAT,
+    F_DN_DIS_CHL_COD,
+    F_DN_FRC_FLG,
+    F_DN_LV2_UMB_BRD_COD,
+    F_DN_LV3_PDT_BRD_COD,
+    F_DN_LV4_PDT_FAM_COD,
+    F_DN_LV5_PDT_SFM_COD,
+    F_DN_LV6_PDT_NAT_COD,
+    F_DN_MAT_COD,
+    F_DN_MEA_DAT,
+    F_DN_PCK_SKU_COD,
+    F_DN_FRC_MTH_NBR
+]
+
+INDEX_COLS_ACTUALS = [
+    F_DN_CRY_COD,
+    F_DN_DIS_CHL_COD,
+    F_DN_FRC_CRE_DAT,
+    F_DN_FRC_FLG,
+    F_DN_LV2_UMB_BRD_COD,
+    F_DN_LV3_PDT_BRD_COD,
+    F_DN_LV4_PDT_FAM_COD,
+    F_DN_LV5_PDT_SFM_COD,
+    F_DN_LV6_PDT_NAT_COD,
+    F_DN_UNIT,
+    F_DN_MAT_COD,
+    F_DN_MEA_DAT,
+    F_DN_PCK_SKU_COD,
+    F_DN_FRC_MTH_NBR,
+]
+
+F_KPIS = 'KPIS'
