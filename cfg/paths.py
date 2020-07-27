@@ -47,11 +47,6 @@ FILENAME_LOCK_SCENARIOS = 'lock_scenarios.pkl'
 # Add by Artefact
 config = {}
 
-## file path
-config["data_folder_path"] = "../data"
-config["temp_folder_path"] = "../temp"
-config["result_folder_path"] = "../results"
-
 ## input files
 config["input_raw_master"] = "raw_master_il_20200210_Update_0602_subbrand_catupdate_v2+2020.csv"
 config["input_category_forecast"] = "IL_feature_table_all_0610_cat_fsct.csv"
@@ -96,6 +91,63 @@ config["features_cat_fsct_col"] = ['upre_fsct',
                                    'spre_mean_3M_fsct',
                                    'mainstream_mean_3M_fsct'] 
 
+config_price_tier_dict = {'ANZ_APT_PF':'upre',
+                          'ANZ_APT_PN':'spre',              
+                          'ANZ_KC_GD':'mainstream', 
+                          'ANZ_KC_GT':'spre',
+                          'DE_APT_PF':'upre', 
+                          'DE_APT_PN':'mainstream',
+                          'NL_NC_PN':'mainstream', 
+                          'UK_APT_PF':'upre', 
+                          'UK_APT_PN':'mainstream',
+                          'UK_C&G_C&G':'mainstream'} 
+
+config["feature_sub_brand"] = [
+    'month', 
+    'sin_month', 
+    'cos_month', 
+    'ANZ_APT',
+    'ANZ_KC', 
+    'DE_APT', 
+    'NL_NC', 
+    'UK_APT', 
+    'UK_C&G',
+    'horizon',
+    'C&G', 'GD','GT', 'PF', 'PN', 
+    'sub_brand_offtake_il_mean_3M',
+    'sub_brand_sellin_il_mean_3M', 
+    'sub_brand_offtake_di_mean_3M',
+    'price_tier_cat_mean_3M', 
+    'price_tier_cat_mean_6M', 
+    'sub_brand_offtake_il_mean_6M',
+    'sub_brand_sellin_il_mean_6M',
+    'sub_brand_offtake_di_mean_6M',
+    'sub_brand_offtake_il_mean_9M',
+    'sub_brand_sellin_il_mean_9M', 
+    'sub_brand_offtake_di_mean_9M',
+    'price_tier_cat_mean_9M',
+    'sub_brand_offtake_il_mean_12M',
+    'sub_brand_sellin_il_mean_12M',
+    'sub_brand_offtake_di_mean_12M',
+    'price_tier_cat_mean_12M', 
+    'sub_brand_offtake_il_mean_24M',
+    'sub_brand_sellin_il_mean_24M',
+    'sub_brand_offtake_di_mean_24M',
+    'price_tier_cat_mean_24M',
+    '0to6_month_population_mean_3M',
+    '6to12_month_population_mean_3M', 
+    '12to36_month_population_mean_3M',
+    '0to6_month_population_mean_6M', 
+    '6to12_month_population_mean_6M',
+    '12to36_month_population_mean_6M', 
+    '0to6_month_population_mean_9M', 
+    '6to12_month_population_mean_9M', 
+    '12to36_month_population_mean_9M',
+    '0to6_month_population_mean_12M', 
+    '6to12_month_population_mean_12M',
+    '12to36_month_population_mean_12M'] 
+
+
 ## Model Parameters
 ModelConfig = namedtuple("ModelConfig", "model_name model_params")
 
@@ -110,7 +162,18 @@ config["model_config_XGBRegressor"] =  ModelConfig(
         'n_jobs': 12,
         'verbosity': 2})
 
-config["model_config_RandomForestRegressor"] = ModelConfig(
+config["model_config_XGBRegressor_sub_brand"] =  ModelConfig(
+    model_name="XGBRegressor",
+    model_params={
+        'max_depth': 8,
+        'gamma': 0.1,
+        'subsample': 0.3,
+        'n_estimators': 50,
+        'learning_rate': 0.1,
+        'n_jobs': 12,
+        'verbosity': 1})
+
+config["model_config_RandomForestRegressor_brand"] = ModelConfig(
         model_name="RandomForestRegressor",
         model_params={
             'max_depth': 8,
