@@ -4,6 +4,7 @@ from typing import List
 import lunarcalendar
 import numpy as np
 import pandas as pd
+import copy
 
 V_VERY_SMALL = 1e-6
 
@@ -88,7 +89,31 @@ def get_all_combination_date(dwp: List, horizon: int):
     return list_dwp, list_dtp
 
 
-def get_observed_sales(res: pd.DataFrame, label: str, year: int, month: int, date_name: str, value_col: str) -> float:
+# def get_observed_sales(res: pd.DataFrame, label: str, year: int, month: int, date_name: str, value_col: str) -> float:
+#     """ Function to get the ratio of sales of one month compared to its surrounding months
+
+#     :param value_col:
+#     :param date_name:
+#     :param res: dataframe containing the sales
+#     :param label: label for which we want to compute the ratio
+#     :param year: year for which we want to compute the ratio
+#     :param month: month for which we want to compute the ratio
+#     :param date_name: name of the date column
+#     :return: the ratio
+#     """
+
+#     temp = res.copy()
+#     temp = temp[temp.label == label]
+#     ob = temp[temp[date_name] == (year * 100 + month - 1)][value_col].sum() + \
+#          temp[temp[date_name] == (year * 100 + month + 1)][value_col].sum()
+#     ac = temp[temp[date_name] == (year * 100 + month)][value_col].sum()
+
+#     return ac / ob
+
+
+def get_observed_sales(res: pd.DataFrame, 
+                       label: str,brand: str,
+                       year: int, month: int, date_name: str, value_col: str) -> float:
     """ Function to get the ratio of sales of one month compared to its surrounding months
 
     :param value_col:
@@ -102,11 +127,13 @@ def get_observed_sales(res: pd.DataFrame, label: str, year: int, month: int, dat
     """
 
     temp = res.copy()
-    temp = temp[temp.label == label]
-    ob = temp[temp[date_name] == (year * 100 + month - 1)][value_col].sum() + \
-         temp[temp[date_name] == (year * 100 + month + 1)][value_col].sum()
-    ac = temp[temp[date_name] == (year * 100 + month)][value_col].sum()
-
+    ob = temp[(temp[date_name] == (year * 100 + month - 1)) &
+              (temp['country_brand'] == brand)][value_col].sum() +\
+         temp[(temp[date_name] == (year * 100 + month + 1)) &
+              (temp['country_brand'] == brand)][value_col].sum()
+    ac = temp[(temp[date_name] == (year * 100 + month)) &
+              (temp['country_brand'] == brand)][value_col].sum() 
+ 
     return ac / ob
 
 
@@ -276,9 +303,55 @@ def format_label_data(data: pd.DataFrame, label: str):
     return data
 
 
-def apply_forecast_correction(sales, forecast, forecast_filtered, label, year, month, thrsh=0.05):
-    """ This function is used to apply the forecast correction depending upon the rule described in the documentation
+# def apply_forecast_correction(sales, forecast, forecast_filtered, label, year, month, thrsh=0.05):
+#     """ This function is used to apply the forecast correction depending upon the rule described in the documentation
 
+#     :param sales: raw_master containing the original historical sales data
+#     :param forecast: dataframe containing the full forecast
+#     :param forecast_filtered: dataframe containing forecasts corresponding to the chosen label
+#     :param label: chosen label
+#     :param year: int
+#     :param month: int
+#     :param thrsh: threshold below which the correction is not applied
+#     :return: dataframe containing the corrected forecast
+#     """
+
+#     def get_cny_month(cny_year):
+#         cny_date = lunarcalendar.festival.ChineseNewYear(cny_year)
+#         cny_month = cny_date.month
+
+#         if cny_date.day > 24:
+#             cny_month += 1
+
+#         return cny_month
+
+#     year_minus_1 = year - 1
+#     month_y1 = month
+#     year_minus_2 = year - 2
+#     month_y2 = month
+
+#     if month == 'CNY':
+#         month = get_cny_month(year)
+#         month_y1 = get_cny_month(year_minus_1)
+#         month_y2 = get_cny_month(year_minus_2)
+
+#     correction_condition = (int(str(year * 100 + month)) != forecast.date_to_predict.max()) & \
+#                            (int(str(year * 100 + month)) != forecast.date_to_predict.min())
+
+#     if correction_condition:
+#         tar = (get_observed_sales(sales, label, year_minus_2, month_y2, 'calendar_yearmonth', 'offtake') + get_observed_sales(
+#             sales, label, year_minus_1, month_y1, 'calendar_yearmonth', 'offtake')) / 2
+#         acoc = get_observed_sales(forecast, label, year, month, 'date_to_predict', 'prediction')
+#         mf = tar / acoc
+
+#         if np.abs(tar - acoc) > thrsh:
+#             forecast_filtered.loc[forecast_filtered.date_to_predict == year * 100 + month, 'prediction'] *= mf
+
+#     return forecast_filtered
+
+
+def apply_forecast_correction(sales, forecast, forecast_filtered, label,brand, year, month, thrsh=0.05):
+    """ This function is used to apply the forecast correction depending upon the rule described in the documentation
     :param sales: raw_master containing the original historical sales data
     :param forecast: dataframe containing the full forecast
     :param forecast_filtered: dataframe containing forecasts corresponding to the chosen label
@@ -302,25 +375,56 @@ def apply_forecast_correction(sales, forecast, forecast_filtered, label, year, m
     month_y1 = month
     year_minus_2 = year - 2
     month_y2 = month
+    year_minus_3 = year - 3
+    month_y3 = month
+    year_minus_4 = year - 4
+    month_y4 = month
 
     if month == 'CNY':
         month = get_cny_month(year)
         month_y1 = get_cny_month(year_minus_1)
         month_y2 = get_cny_month(year_minus_2)
-
-    correction_condition = (int(str(year * 100 + month)) != forecast.date_to_predict.max()) & \
-                           (int(str(year * 100 + month)) != forecast.date_to_predict.min())
+        
+    correction_condition = (int(str(year * 100 + month)) != forecast.date_to_predict.max()) &\
+    (int(str(year * 100 + month)) != forecast.date_to_predict.min())
+    
+    # When first month of forecast need adjust
+    if int(str(year * 100 + month)) == forecast.date_to_predict.min():
+        actual_ = sales[sales.calendar_yearmonth == int(str(year * 100 + month))-1]
+        actual_['label'] = label
+        actual_['brand'] = brand
+        actual_['horizon'] = 0
+        actual_.rename(columns = {'calendar_yearmonth':'date_to_predict',
+                                  'offtake':'prediction'}, inplace = True)
+        actual_ = actual_[forecast.columns]
+        forecast = pd.concat([actual_, forecast])
+        correction_condition = True
 
     if correction_condition:
-        tar = (get_observed_sales(sales, label, year_minus_2, month_y2, 'calendar_yearmonth', 'offtake') + get_observed_sales(
-            sales, label, year_minus_1, month_y1, 'calendar_yearmonth', 'offtake')) / 2
-        acoc = get_observed_sales(forecast, label, year, month, 'date_to_predict', 'prediction')
-        mf = tar / acoc
+        if month==11:
+            tar = get_observed_sales(sales, label,brand,year_minus_4, month_y4, 
+                                     'calendar_yearmonth', 'offtake')*0.1 + \
+                  get_observed_sales(sales, label,brand, year_minus_3, month_y3, 
+                                     'calendar_yearmonth', 'offtake')*0.2 + \
+                  get_observed_sales(sales, label,brand, year_minus_2, month_y2, 
+                                     'calendar_yearmonth', 'offtake')*0.3 + \
+                  get_observed_sales(sales, label,brand, year_minus_1, month_y1, 
+                                     'calendar_yearmonth', 'offtake')*0.4
+        else:
+            tar = get_observed_sales(sales, label,brand,year_minus_2, month_y2,
+                                     'calendar_yearmonth', 'offtake')*0.2 + \
+                  get_observed_sales(sales, label,brand, year_minus_1, month_y1,
+                                     'calendar_yearmonth', 'offtake')*0.8
+        acoc = get_observed_sales(forecast, 
+                                  label,brand,
+                                  year, month, 'date_to_predict', 'prediction')  
+        mf = tar / acoc 
 
         if np.abs(tar - acoc) > thrsh:
-            forecast_filtered.loc[forecast_filtered.date_to_predict == year * 100 + month, 'prediction'] *= mf
+            forecast_filtered.loc[(forecast_filtered.date_to_predict == year * 100 + month) &
+                                  (forecast_filtered.country_brand==brand), 'prediction'] *= mf
 
-    return forecast_filtered
+    return forecast_filtered 
 
 
 def convert_format(old_cvr):
