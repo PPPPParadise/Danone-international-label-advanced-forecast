@@ -30,7 +30,8 @@ Such being the case, they wants to have this project to help them forecast offta
 |-- requirements.txt    # Python libraries used
 |-- cfg                 # Configs, for example data folder path.
 |-- run                 # Main function used to trigger the script
-|   |-- src             # Functions  used in the controllers 
+|-- src                 # Functions used in the controllers 
+|-- tests               # Functions used to test functions
 |-- data                # data storage folder
 |-- temp                # folder used to save temporary files
 |-- results             # Forecast are generate in this folder
@@ -53,11 +54,11 @@ pip3 install requirements.txt
 In order to generate IL totoal offtake forecast, we can do the following instructions in the terminal
 
 ```
-cd main
+cd run
 ```
 
 ```
-python3 ForecasterIL.py
+python3 demand_forecast_il.py
 ```
 
 And the forecast results will be put in the results folder.
