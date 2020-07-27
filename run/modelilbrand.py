@@ -2,11 +2,10 @@
 # coding: utf-8
 
 import sys,os
-sys.path.append(os.path.dirname(os.getcwd()))
+# sys.path.append(os.path.dirname(os.getcwd()))
 from functools import reduce
-import xgboost as xgb
+# import xgboost as xgb
 from src.exploration.MLDIModel import GlobalDIModel
-
 from cfg.paths import *
 from src.forecaster.features import *
 from src.forecaster.model import Model
@@ -18,7 +17,7 @@ warnings.filterwarnings('ignore')
 
 
 
-class Modelil(Model):
+class Modelilbrand(Model):
     """
     XGB Regressor model with postprocessing of the output
     One XGB model is trained for each prediction horizon
