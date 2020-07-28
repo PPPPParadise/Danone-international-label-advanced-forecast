@@ -28,7 +28,8 @@ Such being the case, they wants to have this project to help them forecast offta
 .
 |-- README.md           # code description and user guide
 |-- requirements.txt    # Python libraries used
-|-- cfg                 # Configs, for example data folder path.
+|-- documentation       # Including some detailed explanation 
+|-- cfg                 # Configs, for example data folder path
 |-- run                 # Main function used to trigger the script
 |-- src                 # Functions used in the controllers 
 |-- tests               # Functions used to test functions
